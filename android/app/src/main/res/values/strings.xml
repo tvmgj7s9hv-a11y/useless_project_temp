@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">ScrollMeter</string>
-    <string name="accessibility_service_description">ScrollMeter uses Accessibility Service solely to detect when Instagram is actively in the foreground and estimate vertical scroll distance. ScrollMeter CANNOT and DOES NOT read screen text, photos, messages, or user credentials. All statistics remain 100% private and on-device.</string>
+    <string name="app_name">SAHAL\'S SCROLL</string>
+    <string name="accessibility_service_description">SAHAL\'S SCROLL uses Accessibility Service solely to detect when Instagram is actively in the foreground and estimate vertical scroll distance. SAHAL\'S SCROLL CANNOT and DOES NOT read screen text, photos, messages, or user credentials. All statistics remain 100% private and on-device.</string>
     
     <string name="permission_required_title">Accessibility Access Required</string>
-    <string name="permission_required_desc">To track scrolling inside Instagram in the background, Android requires enabling ScrollMeter in Accessibility settings.</string>
+    <string name="permission_required_desc">To track scrolling inside Instagram in the background, Android requires enabling SAHAL\'S SCROLL in Accessibility settings.</string>
     <string name="btn_enable_service">Enable in Settings</string>
     
     <string name="tab_today">Today</string>

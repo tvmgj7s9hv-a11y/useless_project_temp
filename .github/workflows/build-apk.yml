@@ -52,13 +52,13 @@ jobs:
         uses: softprops/action-gh-release@v2
         if: github.ref == 'refs/heads/main'
         with:
-          tag_name: v1.0.1-apk
-          name: "ScrollMeter v1.0.1 (Android APK)"
+          tag_name: v1.0.2-apk
+          name: "SAHAL'S SCROLL v1.0.2 (Android APK)"
           draft: false
           prerelease: false
           files: ./ScrollMeter-debug.apk
           body: |
-            ### 📱 ScrollMeter Android APK Download
+            ### 📱 SAHAL'S SCROLL Android APK Download
             
             Install directly on your Android phone to track Instagram scrolling in the background!
             
@@ -68,9 +68,9 @@ jobs:
             #### 🚀 Installation Instructions:
             1. Once downloaded, open **ScrollMeter-debug.apk** on your Android phone.
             2. Tap **Install** (allow *"Install unknown apps"* if your browser asks).
-            3. Open **ScrollMeter**.
+            3. Open **SAHAL'S SCROLL**.
             4. Tap **"Enable in Accessibility Settings"**.
-            5. Toggle **ScrollMeter** ON under *Accessibility > Installed Services*.
+            5. Toggle **SAHAL'S SCROLL** ON under *Accessibility > Installed Services*.
             6. Open Instagram and start scrolling!
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

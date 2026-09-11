@@ -1,10 +1,8 @@
-<img width="1280" height="640" alt="git (1)" src="https://github.com/user-attachments/assets/8920b256-2ba8-4988-b824-5351134eb4bd" />
-
-# ScrollMeter 📏🎯
+# SAHAL'S SCROLL 📏🎯
 
 > "You've scrolled 2.47 km on Instagram today... without ever leaving your chair."
 
-ScrollMeter is an Android mobile app and background tracking service that measures the user's estimated vertical scrolling distance while they use Instagram and converts that distance into funny, relatable real-world metrics (meters, kilometers, landmarks, and marathon distances).
+SAHAL'S SCROLL is an Android mobile app and background tracking service that measures the user's estimated vertical scrolling distance while they use Instagram and converts that distance into funny, relatable real-world metrics (meters, kilometers, landmarks, and marathon distances).
 
 ---
 

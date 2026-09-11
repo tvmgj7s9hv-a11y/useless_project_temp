@@ -290,7 +290,7 @@
         elAppStateLabel.parentElement.querySelector('.dot-live').style.background = 'var(--accent-green)';
         elInappTrackingBadge.style.opacity = '1';
         elLiveStreamCard.style.display = 'flex';
-        showToast('Instagram Opened', 'ScrollMeter is now tracking Instagram in the background.', '📱');
+        showToast('Instagram Opened', "SAHAL'S SCROLL is now tracking Instagram in the background.", '📱');
       } else {
         elAppStateLabel.textContent = 'BACKGROUND (Paused)';
         elAppStateLabel.parentElement.querySelector('.dot-live').style.background = '#94a3b8';
@@ -526,7 +526,7 @@
           currentSessionSeconds = 0;
           renderDashboard();
           saveState();
-          showToast('ScrollMeter Reset', "Today's distance has been reset to 0 m.", '🔄');
+          showToast("SAHAL'S SCROLL Reset", "Today's distance has been reset to 0 m.", '🔄');
         }
       });
     }

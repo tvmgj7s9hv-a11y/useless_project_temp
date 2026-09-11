@@ -87,7 +87,7 @@ class NotificationHelper(private val context: Context) {
 
         val notification = NotificationCompat.Builder(context, CHANNEL_USAGE_ID)
             .setSmallIcon(android.R.drawable.ic_dialog_info)
-            .setContentTitle("ScrollMeter: $formattedDistance scrolled")
+            .setContentTitle("SAHAL'S SCROLL: $formattedDistance scrolled")
             .setContentText(wittyComment)
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .setContentIntent(pendingIntent)

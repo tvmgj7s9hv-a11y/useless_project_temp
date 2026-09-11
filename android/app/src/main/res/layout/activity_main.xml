@@ -27,7 +27,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ScrollMeter"
+                android:text="@string/app_name"
                 android:textColor="@color/text_primary"
                 android:textSize="22sp"
                 android:textStyle="bold" />
@@ -116,7 +116,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="To track Instagram scrolling in the background, please enable ScrollMeter in your device's Accessibility settings."
+                        android:text="To track Instagram scrolling in the background, please enable SAHAL\'S SCROLL in your device's Accessibility settings."
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp" />
 
@@ -789,7 +789,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
-                        android:text="ScrollMeter does NOT collect your Instagram passwords, messages, direct chats, photos, contacts, or posts. Tracking is 100% on-device and analyzes only vertical scroll gesture displacement."
+                        android:text="SAHAL\'S SCROLL does NOT collect your Instagram passwords, messages, direct chats, photos, contacts, or posts. Tracking is 100% on-device and analyzes only vertical scroll gesture displacement."
                         android:textColor="@color/text_muted"
                         android:textSize="11sp"
                         android:lineSpacingExtra="2dp" />
