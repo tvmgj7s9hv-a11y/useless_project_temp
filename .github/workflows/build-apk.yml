@@ -1,0 +1,71 @@
+name: Build ScrollMeter APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build & Release Android APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Build Debug APK with Gradle
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon --stacktrace
+
+      - name: Verify APK Generated
+        run: |
+          ls -la android/app/build/outputs/apk/debug/
+          cp android/app/build/outputs/apk/debug/app-debug.apk ./ScrollMeter-debug.apk
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ScrollMeter-debug-apk
+          path: ./ScrollMeter-debug.apk
+          retention-days: 30
+
+      - name: Create GitHub Release with APK
+        uses: softprops/action-gh-release@v2
+        if: github.ref == 'refs/heads/main'
+        with:
+          tag_name: v1.0.0-apk
+          name: "ScrollMeter v1.0.0 (Android APK)"
+          draft: false
+          prerelease: false
+          files: ./ScrollMeter-debug.apk
+          body: |
+            ### 📱 ScrollMeter Android APK Download
+            
+            Install directly on your Android phone to track Instagram scrolling in the background!
+            
+            #### 📥 Download:
+            Download **ScrollMeter-debug.apk** attached below.
+            
+            #### 🚀 Setup on your Android Phone:
+            1. Download and tap the APK to install (allow *"Install from unknown sources"* if prompted).
+            2. Open **ScrollMeter**.
+            3. Tap **"Enable in Accessibility Settings"**.
+            4. Turn ON **ScrollMeter** under *Accessibility > Installed Services*.
+            5. Scroll Instagram and watch your distance accumulate!
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

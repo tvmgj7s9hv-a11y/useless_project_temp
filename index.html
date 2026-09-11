@@ -1,1 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ScrollMeter — Instagram Scroll Distance Tracker</title>
+  <meta name="description" content="Measure your estimated vertical scrolling distance while using Instagram and convert it into relatable real-world metrics like meters, kilometers, and marathon distances.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+  <!-- Top Global Header -->
+  <header class="app-header">
+    <div class="header-content">
+      <div class="brand">
+        <div class="brand-icon">📏</div>
+        <div>
+          <h1>ScrollMeter</h1>
+          <p class="brand-subtitle">TinkerHub Useless Projects 3.0 • Mobile &amp; Background Tracking Engine</p>
+        </div>
+      </div>
+      <div class="header-badges">
+        <div class="status-badge active" id="globalStatusBadge">
+          <span class="pulsing-dot"></span>
+          <span id="globalStatusText">ACCESSIBILITY TRACKER ACTIVE</span>
+        </div>
+        <button class="btn-simulator-toggle" id="btnToggleSimMode">
+          <span class="icon">📱</span> View Mode: Side-by-Side
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Showcase Container -->
+  <main class="showcase-container">
+
+    <!-- LEFT COLUMN: SCROLLMETER MOBILE APP -->
+    <section class="device-section">
+      <div class="device-label">
+        <span>ScrollMeter Native App (Dark Mode UI)</span>
+        <span class="device-tag">Android Service Client</span>
+      </div>
+
+      <div class="phone-frame scrollmeter-phone" id="scrollmeterPhone">
+        <!-- Phone Speaker & Camera Pill -->
+        <div class="phone-notch">
+          <div class="notch-speaker"></div>
+          <div class="notch-camera"></div>
+        </div>
+
+        <!-- Phone Status Bar -->
+        <div class="phone-status-bar">
+          <span class="status-time" id="statusClock">09:41</span>
+          <div class="status-icons">
+            <span class="icon-signal">📶</span>
+            <span class="icon-wifi">🛜</span>
+            <span class="icon-battery">🔋</span>
+          </div>
+        </div>
+
+        <!-- In-App Header -->
+        <div class="inapp-header">
+          <div>
+            <h2 class="inapp-title">ScrollMeter</h2>
+            <p class="inapp-subtitle">Instagram Distance Tracker</p>
+          </div>
+          <div class="inapp-badge" id="inappTrackingBadge">
+            <span class="dot-green"></span>
+            <span class="badge-label">TRACKING</span>
+          </div>
+        </div>
+
+        <!-- Screen Content Container (Scrollable) -->
+        <div class="inapp-content" id="inappContent">
+
+          <!-- TAB 1: TODAY (DASHBOARD) -->
+          <div class="tab-pane active" id="tabToday">
+
+            <!-- Hero Distance Card -->
+            <div class="hero-card">
+              <div class="hero-label-row">
+                <span class="hero-label">TODAY'S SCROLL</span>
+                <span class="hero-estimate-tag">ESTIMATE</span>
+              </div>
+
+              <div class="hero-metric-row">
+                <div class="hero-number" id="uiTodayDistance">2.47 km</div>
+              </div>
+
+              <div class="hero-session-meta">
+                <span class="tag-instagram">Instagram</span>
+                <span class="session-duration" id="uiTodayDuration">1h 42m active</span>
+              </div>
+
+              <!-- Daily Goal Progress -->
+              <div class="goal-progress-wrap">
+                <div class="progress-track">
+                  <div class="progress-fill" id="uiGoalProgressFill" style="width: 78%;"></div>
+                </div>
+                <div class="goal-meta-row">
+                  <span id="uiGoalPercentText">78% of 3.0 km daily goal</span>
+                  <span class="goal-target-flag">🎯 Goal: 3.0 km</span>
+                </div>
+              </div>
+
+              <!-- Witty Comparison Quote -->
+              <div class="witty-quote-box" id="uiWittyQuoteBox">
+                <span class="quote-mark">“</span>
+                <span id="uiWittyQuoteText">That's roughly the distance from your home to the nearest coffee shop.</span>
+                <span class="quote-mark">”</span>
+              </div>
+            </div>
+
+            <!-- Live Streaming Session Banner (Pulsing when Instagram is scrolled) -->
+            <div class="live-stream-card" id="uiLiveStreamCard">
+              <div class="live-pulse-indicator"></div>
+              <div class="live-stream-info">
+                <div class="live-title">Instagram Foreground Session Active</div>
+                <div class="live-data" id="uiLiveDataStream">Streaming scroll events: +0 m (0s)</div>
+              </div>
+            </div>
+
+            <!-- Quick Stats 2x2 Grid -->
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="stat-title">THIS WEEK</div>
+                <div class="stat-value" id="uiWeekDistance">14.8 km</div>
+                <div class="stat-hint">Across 7 days</div>
+              </div>
+
+              <div class="stat-card">
+                <div class="stat-title">THIS MONTH</div>
+                <div class="stat-value" id="uiMonthDistance">48.2 km</div>
+                <div class="stat-hint">September total</div>
+              </div>
+
+              <div class="stat-card">
+                <div class="stat-title">SESSIONS TODAY</div>
+                <div class="stat-value" id="uiTodaySessions">7 opens</div>
+                <div class="stat-hint">Instagram launches</div>
+              </div>
+
+              <div class="stat-card">
+                <div class="stat-title">DAILY AVERAGE</div>
+                <div class="stat-value" id="uiDailyAverage">2.3 km/day</div>
+                <div class="stat-hint">Calculated rolling avg</div>
+              </div>
+            </div>
+
+            <p class="disclaimer-text">*Estimated physical distance based on vertical scroll displacement gestures and device DPI.</p>
+          </div>
+
+          <!-- TAB 2: HISTORY -->
+          <div class="tab-pane" id="tabHistory">
+            <div class="section-heading">
+              <h3>Scroll History</h3>
+              <p>Your daily Instagram distance logs</p>
+            </div>
+            <div class="history-list" id="uiHistoryList">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- TAB 3: STATISTICS & MILESTONES -->
+          <div class="tab-pane" id="tabStats">
+            <div class="section-heading">
+              <h3>All-Time Records</h3>
+              <p>Lifetime stats and landmark achievements</p>
+            </div>
+
+            <div class="records-card">
+              <div class="record-row">
+                <span class="record-name">Total Lifetime Distance</span>
+                <span class="record-val highlight" id="uiLifetimeDistance">142.5 km</span>
+              </div>
+              <div class="record-divider"></div>
+              <div class="record-row">
+                <span class="record-name">Longest Single Session</span>
+                <span class="record-val" id="uiLongestSession">2h 15m (3.8 km)</span>
+              </div>
+              <div class="record-divider"></div>
+              <div class="record-row">
+                <span class="record-name">Highest Single Day</span>
+                <span class="record-val" id="uiHighestDay">6.4 km (Sep 08)</span>
+              </div>
+            </div>
+
+            <div class="section-heading mt-20">
+              <h3>Landmarks &amp; Milestones</h3>
+              <p>Relatable distances conquered with your thumb</p>
+            </div>
+
+            <div class="milestones-list" id="uiMilestonesList">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- TAB 4: SETTINGS -->
+          <div class="tab-pane" id="tabSettings">
+            <div class="section-heading">
+              <h3>Preferences &amp; Controls</h3>
+              <p>Customize tracking, alerts, and units</p>
+            </div>
+
+            <div class="settings-group">
+              <div class="setting-item">
+                <div class="setting-text">
+                  <div class="setting-title">Instagram Background Tracking</div>
+                  <div class="setting-sub">Only tracks when Instagram is foreground</div>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="settingTrackingToggle" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+
+              <div class="setting-item">
+                <div class="setting-text">
+                  <div class="setting-title">Milestone Notifications</div>
+                  <div class="setting-sub">Alerts when passing landmarks (e.g. 1 km)</div>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="settingNotifToggle" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+
+              <div class="setting-item col">
+                <div class="setting-title">Daily Goal</div>
+                <div class="range-wrap">
+                  <input type="range" id="settingGoalSlider" min="500" max="10000" step="250" value="3000">
+                  <div class="range-val" id="settingGoalVal">3.0 km</div>
+                </div>
+              </div>
+
+              <div class="setting-item col">
+                <div class="setting-title">Distance Unit</div>
+                <div class="unit-selector">
+                  <button class="btn-unit active" id="btnUnitMetric" data-unit="metric">Metric (m / km)</button>
+                  <button class="btn-unit" id="btnUnitImperial" data-unit="imperial">Imperial (ft / mi)</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="section-heading mt-20">
+              <h3>Data Management</h3>
+            </div>
+
+            <div class="action-buttons">
+              <button class="btn-action-outlined" id="btnResetTodayStats">🔄 Reset Today's Distance</button>
+              <button class="btn-action-danger" id="btnDeleteAllData">🗑️ Delete All Stored History</button>
+            </div>
+
+            <div class="privacy-callout">
+              <div class="privacy-header">
+                <span class="privacy-shield">🛡️</span>
+                <h4>100% Privacy Guarantee</h4>
+              </div>
+              <p>ScrollMeter does NOT capture Instagram passwords, chats, comments, direct messages, photos, or contacts. All gesture estimation runs locally on-device via official accessibility APIs.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom Navigation Bar -->
+        <nav class="phone-bottom-nav">
+          <button class="nav-item active" data-tab="tabToday">
+            <span class="nav-icon">📱</span>
+            <span class="nav-text">Today</span>
+          </button>
+          <button class="nav-item" data-tab="tabHistory">
+            <span class="nav-icon">📅</span>
+            <span class="nav-text">History</span>
+          </button>
+          <button class="nav-item" data-tab="tabStats">
+            <span class="nav-icon">📊</span>
+            <span class="nav-text">Statistics</span>
+          </button>
+          <button class="nav-item" data-tab="tabSettings">
+            <span class="nav-icon">⚙️</span>
+            <span class="nav-text">Settings</span>
+          </button>
+        </nav>
+      </div>
+    </section>
+
+
+    <!-- RIGHT COLUMN: INTERACTIVE INSTAGRAM FEED SIMULATOR -->
+    <section class="simulator-section">
+      <div class="device-label">
+        <span>Target App: Instagram Feed Simulator</span>
+        <span class="simulator-hint">👇 Scroll inside this phone to track distance!</span>
+      </div>
+
+      <div class="phone-frame instagram-phone" id="instagramPhone">
+        <!-- Phone Speaker & Camera Pill -->
+        <div class="phone-notch">
+          <div class="notch-speaker"></div>
+          <div class="notch-camera"></div>
+        </div>
+
+        <!-- Instagram App Header -->
+        <div class="ig-header">
+          <div class="ig-logo-text">Instagram</div>
+          <div class="ig-header-icons">
+            <span class="ig-icon" title="Notifications">❤️</span>
+            <span class="ig-icon" title="Messages">💬</span>
+          </div>
+        </div>
+
+        <!-- App State Bar (Foreground vs Background Toggle) -->
+        <div class="ig-status-bar">
+          <span class="app-tag">com.instagram.android</span>
+          <button class="btn-app-state" id="btnToggleForeground">
+            <span class="dot-live"></span> State: <strong id="appStateLabel">FOREGROUND (Active)</strong>
+          </button>
+        </div>
+
+        <!-- Instagram Feed (Scrollable Container) -->
+        <div class="ig-scroll-feed" id="igScrollFeed">
+
+          <!-- Stories Tray -->
+          <div class="ig-stories-tray">
+            <div class="story-item active-story">
+              <div class="story-avatar-ring">
+                <div class="story-avatar avatar-1">🧑‍💻</div>
+              </div>
+              <span class="story-username">Your Story</span>
+            </div>
+            <div class="story-item active-story">
+              <div class="story-avatar-ring">
+                <div class="story-avatar avatar-2">🏕️</div>
+              </div>
+              <span class="story-username">alex_wander</span>
+            </div>
+            <div class="story-item active-story">
+              <div class="story-avatar-ring">
+                <div class="story-avatar avatar-3">☕</div>
+              </div>
+              <span class="story-username">coffeecraze</span>
+            </div>
+            <div class="story-item active-story">
+              <div class="story-avatar-ring">
+                <div class="story-avatar avatar-4">🐱</div>
+              </div>
+              <span class="story-username">daily_meow</span>
+            </div>
+            <div class="story-item">
+              <div class="story-avatar-ring">
+                <div class="story-avatar avatar-5">🏔️</div>
+              </div>
+              <span class="story-username">alpine_life</span>
+            </div>
+          </div>
+
+          <!-- Feed Post 1 -->
+          <article class="ig-post">
+            <header class="ig-post-header">
+              <div class="ig-author-avatar">☕</div>
+              <div class="ig-author-meta">
+                <div class="author-name">artisanal_roast <span class="verified-tick">✓</span></div>
+                <div class="post-location">Blue Bottle Coffee, Tokyo</div>
+              </div>
+              <button class="post-more-btn">•••</button>
+            </header>
+
+            <div class="post-media-graphic post-cafe">
+              <div class="graphic-coffee-cup">☕</div>
+              <div class="graphic-badge">Morning Ritual • Pour Over</div>
+            </div>
+
+            <div class="ig-post-actions">
+              <div class="left-actions">
+                <button class="action-btn ig-like-btn">❤️</button>
+                <button class="action-btn">💬</button>
+                <button class="action-btn">🚀</button>
+              </div>
+              <button class="action-btn bookmark-btn">🔖</button>
+            </div>
+
+            <div class="ig-post-content">
+              <div class="post-likes">Liked by <strong>tinkerhub</strong> and <strong>1,429 others</strong></div>
+              <div class="post-caption">
+                <strong>artisanal_roast</strong> Fresh single-origin Ethiopian beans roasted this morning. Perfection in every sip ☕✨
+              </div>
+              <div class="post-comments-count">View all 84 comments</div>
+              <div class="post-time">18 MINUTES AGO</div>
+            </div>
+          </article>
+
+          <!-- Feed Post 2 (Reels / Landscape) -->
+          <article class="ig-post">
+            <header class="ig-post-header">
+              <div class="ig-author-avatar">🏔️</div>
+              <div class="ig-author-meta">
+                <div class="author-name">outdoor_explorers <span class="verified-tick">✓</span></div>
+                <div class="post-location">Dolomites, Italy</div>
+              </div>
+              <button class="post-more-btn">•••</button>
+            </header>
+
+            <div class="post-media-graphic post-mountain">
+              <div class="graphic-mountain">🏔️ 🌲 ☁️</div>
+              <div class="graphic-badge">High Altitude • 3,200m</div>
+            </div>
+
+            <div class="ig-post-actions">
+              <div class="left-actions">
+                <button class="action-btn ig-like-btn">❤️</button>
+                <button class="action-btn">💬</button>
+                <button class="action-btn">🚀</button>
+              </div>
+              <button class="action-btn bookmark-btn">🔖</button>
+            </div>
+
+            <div class="ig-post-content">
+              <div class="post-likes">Liked by <strong>nature_lover</strong> and <strong>8,912 others</strong></div>
+              <div class="post-caption">
+                <strong>outdoor_explorers</strong> When the clouds roll into the valley at dawn. Worth waking up at 4:30 AM every single time 🥾⛰️
+              </div>
+              <div class="post-comments-count">View all 216 comments</div>
+              <div class="post-time">2 HOURS AGO</div>
+            </div>
+          </article>
+
+          <!-- Feed Post 3 (Meme / Humor) -->
+          <article class="ig-post">
+            <header class="ig-post-header">
+              <div class="ig-author-avatar">🛋️</div>
+              <div class="ig-author-meta">
+                <div class="author-name">scrolling_memes</div>
+                <div class="post-location">Living Room Couch</div>
+              </div>
+              <button class="post-more-btn">•••</button>
+            </header>
+
+            <div class="post-media-graphic post-meme">
+              <div class="meme-text">“I will only check Instagram for 5 minutes”</div>
+              <div class="meme-punchline">👉 2 hours &amp; 3 kilometers later... 📱💨</div>
+            </div>
+
+            <div class="ig-post-actions">
+              <div class="left-actions">
+                <button class="action-btn ig-like-btn">❤️</button>
+                <button class="action-btn">💬</button>
+                <button class="action-btn">🚀</button>
+              </div>
+              <button class="action-btn bookmark-btn">🔖</button>
+            </div>
+
+            <div class="ig-post-content">
+              <div class="post-likes">Liked by <strong>42,801 others</strong></div>
+              <div class="post-caption">
+                <strong>scrolling_memes</strong> That feeling when your thumb has more cardio endurance than your entire body 😂😭
+              </div>
+              <div class="post-comments-count">View all 1,048 comments</div>
+              <div class="post-time">5 HOURS AGO</div>
+            </div>
+          </article>
+
+          <!-- Feed Post 4 -->
+          <article class="ig-post">
+            <header class="ig-post-header">
+              <div class="ig-author-avatar">🐱</div>
+              <div class="ig-author-meta">
+                <div class="author-name">fluffy_milo</div>
+                <div class="post-location">Sunbeam Spot</div>
+              </div>
+              <button class="post-more-btn">•••</button>
+            </header>
+
+            <div class="post-media-graphic post-cat">
+              <div class="graphic-cat">🐱 💤 🧶</div>
+              <div class="graphic-badge">Nap Champion 2026</div>
+            </div>
+
+            <div class="ig-post-actions">
+              <div class="left-actions">
+                <button class="action-btn ig-like-btn">❤️</button>
+                <button class="action-btn">💬</button>
+                <button class="action-btn">🚀</button>
+              </div>
+              <button class="action-btn bookmark-btn">🔖</button>
+            </div>
+
+            <div class="ig-post-content">
+              <div class="post-likes">Liked by <strong>19,400 others</strong></div>
+              <div class="post-caption">
+                <strong>fluffy_milo</strong> Do not disturb. Very busy recharging battery for 3 AM zoomies 🐾
+              </div>
+              <div class="post-comments-count">View all 139 comments</div>
+              <div class="post-time">7 HOURS AGO</div>
+            </div>
+          </article>
+
+          <div class="feed-end-card">
+            <div class="end-icon">🎉</div>
+            <h4>You're All Caught Up</h4>
+            <p>You've scrolled through all new posts from the past 3 days.</p>
+            <button class="btn-reload-feed" id="btnResetScrollPosition">⬆️ Back to Top of Feed</button>
+          </div>
+
+        </div>
+
+        <!-- Instagram Bottom Nav -->
+        <nav class="ig-bottom-nav">
+          <span class="ig-nav-icon active">🏠</span>
+          <span class="ig-nav-icon">🔍</span>
+          <span class="ig-nav-icon">➕</span>
+          <span class="ig-nav-icon">🎬</span>
+          <span class="ig-nav-icon">👤</span>
+        </nav>
+      </div>
+
+      <!-- Quick Fast-Forward Simulator Controls -->
+      <div class="simulator-controls-card">
+        <div class="controls-title">🧪 Fast-Forward Testing Controls</div>
+        <p class="controls-desc">Trigger instant scroll gestures to test milestones, notifications, and conversions:</p>
+        <div class="controls-buttons">
+          <button class="btn-sim-action" id="btnSim100m">+100 m (Street)</button>
+          <button class="btn-sim-action" id="btnSim1km">+1.0 km (Walk)</button>
+          <button class="btn-sim-action" id="btnSim5km">+5.0 km (5K Run)</button>
+          <button class="btn-sim-action" id="btnSimMarathon">+42.2 km (Marathon)</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- In-Browser Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

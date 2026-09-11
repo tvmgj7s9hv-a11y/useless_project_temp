@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">ScrollMeter</string>
+    <string name="accessibility_service_description">ScrollMeter uses Accessibility Service solely to detect when Instagram is actively in the foreground and estimate vertical scroll distance. ScrollMeter CANNOT and DOES NOT read screen text, photos, messages, or user credentials. All statistics remain 100% private and on-device.</string>
+    
+    <string name="permission_required_title">Accessibility Access Required</string>
+    <string name="permission_required_desc">To track scrolling inside Instagram in the background, Android requires enabling ScrollMeter in Accessibility settings.</string>
+    <string name="btn_enable_service">Enable in Settings</string>
+    
+    <string name="tab_today">Today</string>
+    <string name="tab_history">History</string>
+    <string name="tab_statistics">Statistics</string>
+    <string name="tab_settings">Settings</string>
+
+    <string name="label_today_scroll">TODAY\'S SCROLL</string>
+    <string name="label_instagram_active">Instagram Session</string>
+    <string name="estimate_disclaimer">*Estimated physical distance based on vertical scroll gestures.</string>
+
+    <string name="setting_tracking">Background Tracking</string>
+    <string name="setting_notifications">Milestone Notifications</string>
+    <string name="setting_daily_goal">Daily Goal (km)</string>
+    <string name="setting_unit">Distance Unit</string>
+    <string name="setting_reset_today">Reset Today\'s Stats</string>
+    <string name="setting_delete_all">Delete All Data</string>
+    <string name="setting_privacy">Privacy Information</string>
+</resources>
