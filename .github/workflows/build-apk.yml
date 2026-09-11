@@ -26,9 +26,13 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
       - name: Build Debug APK with Gradle
         run: |
           cd android
+          gradle wrapper --gradle-version 8.7
           chmod +x gradlew
           ./gradlew assembleDebug --no-daemon --stacktrace
 
@@ -58,14 +62,15 @@ jobs:
             
             Install directly on your Android phone to track Instagram scrolling in the background!
             
-            #### 📥 Download:
-            Download **ScrollMeter-debug.apk** attached below.
+            #### 📥 Direct Download:
+            Click on **ScrollMeter-debug.apk** in the Assets section below to download directly to your phone.
             
-            #### 🚀 Setup on your Android Phone:
-            1. Download and tap the APK to install (allow *"Install from unknown sources"* if prompted).
-            2. Open **ScrollMeter**.
-            3. Tap **"Enable in Accessibility Settings"**.
-            4. Turn ON **ScrollMeter** under *Accessibility > Installed Services*.
-            5. Scroll Instagram and watch your distance accumulate!
+            #### 🚀 Installation Instructions:
+            1. Once downloaded, open **ScrollMeter-debug.apk** on your Android phone.
+            2. Tap **Install** (allow *"Install unknown apps"* if your browser asks).
+            3. Open **ScrollMeter**.
+            4. Tap **"Enable in Accessibility Settings"**.
+            5. Toggle **ScrollMeter** ON under *Accessibility > Installed Services*.
+            6. Open Instagram and start scrolling!
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
