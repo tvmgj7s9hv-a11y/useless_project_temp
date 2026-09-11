@@ -513,6 +513,23 @@
         showToast('Data Cleared', 'All stored statistics have been erased from device.', '🗑️');
       }
     });
+
+    // Quick reset button on the Today hero card
+    const btnQuickReset = document.getElementById('btnQuickResetWeb');
+    if (btnQuickReset) {
+      btnQuickReset.addEventListener('click', () => {
+        if (confirm("Reset today's Instagram scroll distance back to 0?")) {
+          state.todayMeters = 0.0;
+          state.todaySeconds = 0;
+          state.todaySessions = 0;
+          currentSessionMeters = 0.0;
+          currentSessionSeconds = 0;
+          renderDashboard();
+          saveState();
+          showToast('ScrollMeter Reset', "Today's distance has been reset to 0 m.", '🔄');
+        }
+      });
+    }
   }
 
   function renderSettings() {

@@ -49,6 +49,19 @@ class InstagramAccessibilityService : AccessibilityService() {
 
         private val _currentSessionDurationSeconds = MutableStateFlow(0L)
         val currentSessionDurationSeconds: StateFlow<Long> = _currentSessionDurationSeconds.asStateFlow()
+
+        @Volatile
+        var instance: InstagramAccessibilityService? = null
+            private set
+
+        fun resetRunningMeters() {
+            instance?.let { service ->
+                service.todayTotalMeters = 0.0
+                service.sessionDistanceMeters = 0.0
+                service.sessionScrollEvents = 0
+                _currentSessionDistanceMeters.value = 0.0
+            }
+        }
     }
 
     private val serviceScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
@@ -63,6 +76,7 @@ class InstagramAccessibilityService : AccessibilityService() {
 
     override fun onServiceConnected() {
         super.onServiceConnected()
+        instance = this
         _isServiceConnected.value = true
 
         // Calibrate estimator with device's physical screen Y-DPI
@@ -245,6 +259,7 @@ class InstagramAccessibilityService : AccessibilityService() {
     override fun onDestroy() {
         endInstagramSession()
         _isServiceConnected.value = false
+        instance = null
         super.onDestroy()
     }
 

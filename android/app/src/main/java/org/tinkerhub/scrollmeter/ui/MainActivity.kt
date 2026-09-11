@@ -66,6 +66,24 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
             startActivity(intent)
         }
+
+        binding.btnResetMeter.setOnClickListener {
+            AlertDialog.Builder(this)
+                .setTitle("Reset ScrollMeter?")
+                .setMessage("Reset today's Instagram scrolling distance back to 0?")
+                .setPositiveButton("Reset") { _, _ ->
+                    val todayStr = SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date())
+                    lifecycleScope.launch {
+                        app.database.scrollDao().deleteDailyStat(todayStr)
+                        app.database.scrollDao().deleteSessionsForDate(todayStr)
+                        InstagramAccessibilityService.resetRunningMeters()
+                        updateTodayUI(null)
+                        refreshAllScreens()
+                    }
+                }
+                .setNegativeButton("Cancel", null)
+                .show()
+        }
     }
 
     private fun switchTab(tabIndex: Int) {
